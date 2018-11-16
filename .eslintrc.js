@@ -23,7 +23,7 @@ module.exports = {
         "react/jsx-indent": [1, "tab"],
         "react/jsx-indent-props": [1, 0],
         "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["registration"] }],
-        "one-var": ["error", "never "]
+        "one-var": ["error", "never"]
     },
     "globals": {
         "document": true,

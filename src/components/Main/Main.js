@@ -25,16 +25,16 @@ const Main = ({ isLoggedIn }) => (
 );
 
 Main.propTypes = {
-	isLoggedIn: bool
+// eslint-disable-next-line react/require-default-props
+	isLoggedIn: bool,
 };
 
-const mapStateToProps = state => {
-
+const mapStateToProps = (state) => {
 	const { isLoggedIn } = state.authentication;
 
 	return {
-		isLoggedIn
-	}
-}
+		isLoggedIn,
+	};
+};
 
 export default connect(mapStateToProps)(Main);

@@ -40,16 +40,15 @@ const App = ({ isLoggedIn }) => (
 );
 
 App.propTypes = {
-	isLoggedIn: bool
+	isLoggedIn: bool,
 };
 
-const mapStateToProps = state => {
-
+const mapStateToProps = (state) => {
 	const { isLoggedIn } = state.authentication;
 
 	return {
-		isLoggedIn
-	}
-}
+		isLoggedIn,
+	};
+};
 
 export default connect(mapStateToProps)(App);

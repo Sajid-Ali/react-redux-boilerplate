@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { DatePicker } from 'antd';
 
 class Home extends Component {
 	static propTypes = {
@@ -14,6 +15,8 @@ class Home extends Component {
 		return (
 			<div>
 				<h1>Home</h1>
+				<input type="button" value="Add User" onClick={() => console.log('hello from button click!!!!')} />
+				<DatePicker />
 			</div>
 		);
 	}
