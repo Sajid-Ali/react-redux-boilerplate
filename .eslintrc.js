@@ -9,7 +9,7 @@ module.exports = {
         "jest"
     ],
     "rules": {
-        "indent": [1, "tab"],
+        "indent-size": [true, 4],
         "no-tabs": 0,
         "import/no-unresolved": "off",
         "import/extensions": "off",
