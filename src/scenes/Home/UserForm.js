@@ -8,24 +8,24 @@ import { isValidEmail } from '../../utils/utils';
 
 export class UserForm extends React.Component {
     render() {
-        const { submitting, handleSubmit } = this.props;
+        const { submitting, handleSubmit, onSubmit } = this.props;
         return (
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit(onSubmit)} layout="vertical">
                 <Row gutter={16}>
                     <Col span={12}>
                         <Field
                             hasFeedback
-                            component={AInput}
                             name="name"
-                            placeholder="User Name"
+                            label="Name"
+                            component={AInput}
                         />
                     </Col>
                     <Col span={12}>
                         <Field
                             hasFeedback
-                            component={AInput}
                             name="email"
-                            placeholder="User Email"
+                            label="Email"
+                            component={AInput}
                         />
                     </Col>
                 </Row>
@@ -33,9 +33,9 @@ export class UserForm extends React.Component {
                     <Col span={12}>
                         <Field
                             hasFeedback
-                            component={AInput}
                             name="role"
-                            placeholder="User Role"
+                            label="Role"
+                            component={AInput}
                         />
                     </Col>
                     <Col span={12}>
@@ -43,7 +43,7 @@ export class UserForm extends React.Component {
                             hasFeedback
                             component={AInput}
                             name="observation"
-                            placeholder="Observation"
+                            label="Observation"
                         />
                     </Col>
                 </Row>
@@ -66,14 +66,15 @@ export class UserForm extends React.Component {
 
 UserForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
 };
-
+//
 // const validate = (values) => {
 //     const errors = {};
 //
 //     const name = values.get('name');
-//     if (!name || name === 'User Name') {
+//     if (!name) {
 //         errors.name = 'Required';
 //     }
 //
@@ -87,5 +88,4 @@ UserForm.propTypes = {
 
 export default reduxForm({
     form: 'UserForm',
-    // validate,
 })(UserForm);

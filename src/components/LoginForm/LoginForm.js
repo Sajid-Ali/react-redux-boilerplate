@@ -33,17 +33,17 @@ const LoginForm = ({ handleSubmit, loginRequestErrorMessage, submitting }) => (
 );
 
 LoginForm.propTypes = {
-	handleSubmit: func.isRequired,
-	loginRequestErrorMessage: string,
-	submitting: bool.isRequired,
+  handleSubmit: func.isRequired,
+  loginRequestErrorMessage: string,
+  submitting: bool.isRequired,
 };
 
 LoginForm.defaultProps = {
-	loginRequestErrorMessage: '',
+  loginRequestErrorMessage: '',
 };
 
 export default reduxForm({
-	form: 'LoginForm',
-	validate,
+  form: 'LoginForm',
+  validate,
 })(LoginForm);
 

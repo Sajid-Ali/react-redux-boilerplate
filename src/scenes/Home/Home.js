@@ -1,11 +1,13 @@
-/* eslint-disable no-mixed-spaces-and-tabs,indent */
+/* eslint-disable no-mixed-spaces-and-tabs,indent,react/forbid-prop-types,react/require-default-props */
 import PropsType from 'prop-types';
 import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import { initialize } from 'redux-form';
-import { Button, Col, Modal, Row } from 'antd';
+import { Button, Col, Modal, Row, Table } from 'antd';
 
 import UserForm from './UserForm';
+import { columns } from '../TableCompnents/columns';
+import * as actions from '../../store/home/actions';
 
 class Home extends Component {
 	static propTypes = {
@@ -18,11 +20,17 @@ class Home extends Component {
 	    visible: false,
 	}
 
-	toggleModal = () => {
-	    this.setState({ visible: !this.state.visible });
-	}
+	onSubmit = (values) => {
+		if (values)	this.props.create(values);
+	};
+
+  	toggleModal = () => {
+    	this.setState({ visible: !this.state.visible });
+  	}
 
 	render() {
+    const { users } = this.props;
+    console.log(users);
 		return (
 			<div>
 				<Row gutter={16}>
@@ -34,21 +42,35 @@ class Home extends Component {
 							type="primary"
 							onClick={() => {
 							    this.toggleModal();
-                                this.props.initForm('UserForm', {});
-                            }}
+							    this.props.initForm('UserForm', {});
+							}}
 						>
-                        Add User
+              Add User
 						</Button>
 					</Col>
 				</Row>
+				  <br />
+				  <br />
+				  <br />
+				<Row gutter={24}>
+					<Table
+						rowKey="id"
+						size="small"
+						pagination={false}
+						scroll={{ y: 500 }}
+						columns={columns(this)}
+						dataSource={(users && users) || []}
+					/>
+				</Row>
 				<Modal
-					title="Vertically centered modal dialog"
+					title="Create User Modal"
 					centered
 					visible={this.state.visible}
 					onOk={this.toggleModal}
 					onCancel={this.toggleModal}
+					footer={[null]}
 				>
-					<UserForm />
+					<UserForm onSubmit={this.onSubmit} />
 				</Modal>
 			</div>
 		);
@@ -57,13 +79,20 @@ class Home extends Component {
 
 Home.propTypes = {
     initForm: PropsType.func.isRequired,
+  	create: PropsType.func.isRequired,
+    users: PropsType.any,
 };
+
+const mapStateToProps = state => ({
+  users: state.users,
+});
 
 
 function mapDispatchToProps(dispatch) {
     return {
-        initForm: (formName, values) => dispatch(initialize(formName, values)),
+      initForm: (formName, values) => dispatch(initialize(formName, values)),
+      create: values => dispatch(actions.create(values)),
     };
 }
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
